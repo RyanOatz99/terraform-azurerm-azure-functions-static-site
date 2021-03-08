@@ -48,6 +48,10 @@ Created and maintained by Jim Andreasen.
 
 jim.andreasen@reifnir.com
 
+### Inspired by
+
+Anthony Chu's 2017 post [Serving Static Files from Azure Functions](https://anthonychu.ca/post/azure-functions-static-file-server/)
+
 ## License
 
 MIT Licensed. See [LICENSE](https://github.com/reifnir/terraform-azurerm-azure-functions-static-site/blob/main/LICENSE) for full details.
