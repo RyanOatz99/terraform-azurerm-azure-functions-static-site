@@ -1,7 +1,4 @@
 terraform {
-  backend "http" {
-    # Relies on environment variables for configuration
-  }
   # Only testing with 0.14 for now
   required_version = "~> 0.14"
   required_providers {
