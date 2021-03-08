@@ -18,6 +18,8 @@
 
 * Example using custom domain and lets-encrypt ACME generated cert
 
+* Consider bumping to .NET 5.0, which has preview access in Azure Functions: https://codetraveler.io/2021/02/12/creating-azure-functions-using-net-5/
+
 <!--## Assumptions-->
 
 <!--## Important note-->
