@@ -14,6 +14,8 @@
 
 * Support custom domain name
 
+* Take options for more than one default page name
+
 * Example using custom domain and pre-existing TLS cert
 
 * Example using custom domain and lets-encrypt ACME generated cert
