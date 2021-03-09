@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="TestResources\subdirectory\test.html" />
+    <None Remove="TestResources\subdirectory\index.html" />
     <None Remove="TestResources\test.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="TestResources\subdirectory\test.html">
+    <Content Include="TestResources\subdirectory\index.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="TestResources\test.json">

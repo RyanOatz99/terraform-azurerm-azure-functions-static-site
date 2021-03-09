@@ -8,10 +8,15 @@ namespace Reifnir.StaticSite.Content
 {
     public class ContentHelper : IContentHelper
     {
-        readonly string contentRootPath;
-        public ContentHelper(string _contentRootPath)
+        //TODO: allow this to be set via environment variables, possibly take array
+        const string defaultPage = "index.html";
+
+        readonly DirectoryInfo contentRoot;
+        public ContentHelper(string contentRootPath)
         {
-            contentRootPath = _contentRootPath;
+            contentRoot = new DirectoryInfo(contentRootPath);
+            if (!contentRoot.Exists)
+                throw new ArgumentException($"The directory {contentRootPath} does not exist.");
         }
 
         public IContentResult GetContent(string relativePath)
@@ -32,8 +37,14 @@ namespace Reifnir.StaticSite.Content
 
         internal string GetContentAbsolutePath(string relativePath)
         {
-            // Without the wrapping in FileInfo, slashes and backslashes aren't set to system type
-            return new FileInfo(Path.Combine(contentRootPath, relativePath?.TrimStart('/', '\\'))).FullName;
+            var fullPath = Path.GetFullPath(Path.Combine(contentRoot.FullName, relativePath.TrimStart('/', '\\')));
+
+            var contentFullPath = Directory.Exists(fullPath)
+                ? Path.Combine(fullPath, defaultPage)
+                : fullPath;
+
+            return contentFullPath;
+
         }
     }
 }
