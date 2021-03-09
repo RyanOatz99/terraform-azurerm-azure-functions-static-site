@@ -8,11 +8,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
-namespace function
+namespace Reifnir.StaticSite
 {
-    public static class StaticContent
+    public static class StaticSiteFunction
     {
-        [FunctionName("StaticContent")]
+        internal static string test = "";
+        [FunctionName("StaticContentFunction")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             ILogger log)

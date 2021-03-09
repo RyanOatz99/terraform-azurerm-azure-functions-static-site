@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Reifnir.StaticContentServer\Reifnir.StaticContentServer.csproj" />
+    <ProjectReference Include="..\Reifnir.StaticSite\Reifnir.StaticSite.csproj" />
   </ItemGroup>
 
 </Project>

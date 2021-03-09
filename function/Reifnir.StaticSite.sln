@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.6.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reifnir.StaticContentServer", "Reifnir.StaticContentServer\Reifnir.StaticContentServer.csproj", "{968D3425-A5E5-4481-83F8-617A5B0A471F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reifnir.StaticSite", "Reifnir.StaticSite\Reifnir.StaticSite.csproj", "{968D3425-A5E5-4481-83F8-617A5B0A471F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reifnir.StaticContent.Tests", "Reifnir.StaticContentServer.Tests\Reifnir.StaticContentServer.Tests.csproj", "{ADC239DD-399E-4F66-906A-77A4358B37FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reifnir.StaticContent.Tests", "Reifnir.StaticSite.Tests\Reifnir.StaticSite.Tests.csproj", "{ADC239DD-399E-4F66-906A-77A4358B37FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
