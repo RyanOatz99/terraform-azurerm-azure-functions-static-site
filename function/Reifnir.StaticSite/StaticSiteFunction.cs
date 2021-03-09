@@ -7,14 +7,20 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Reifnir.StaticSite.Content;
 
 namespace Reifnir.StaticSite
 {
-    public static class StaticSiteFunction
+    public class StaticSiteFunction
     {
-        internal static string test = "";
+        readonly IContentHelper contentHelper;
+        public StaticSiteFunction(IContentHelper _contentHelper)
+        {
+            contentHelper = _contentHelper;
+        }
+
         [FunctionName("StaticContentFunction")]
-        public static async Task<IActionResult> Run(
+        public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
             ILogger log)
         {
