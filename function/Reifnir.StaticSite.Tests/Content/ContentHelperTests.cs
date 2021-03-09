@@ -186,7 +186,7 @@ namespace Reifnir.StaticSite.Tests.Content
         {
             var sut = new ContentHelper(contentRoot.FullName);
             var expected = indexHtmlFileInSubdirectory.FullName;
-            var actual = sut.GetContentAbsolutePath($"{indexHtmlFileInSubdirectory.Directory.FullName}/");
+            var actual = sut.GetContentAbsolutePath($"{indexHtmlFileInSubdirectory.Directory.Name}/");
             Assert.Equal(expected, actual);
         }
 
