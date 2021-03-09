@@ -16,6 +16,8 @@
 
 * Take options for more than one default page name
 
+* Add optional AppInsights integration (just take a key or magic up a whole resource)
+
 * Example using custom domain and pre-existing TLS cert
 
 * Example using custom domain and lets-encrypt ACME generated cert

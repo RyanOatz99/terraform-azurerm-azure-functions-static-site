@@ -1,0 +1,4 @@
+.terraform
+
+# Directory in which temporary artifacts are created
+.temp
