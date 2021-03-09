@@ -8,6 +8,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Reifnir.StaticSite.Content;
+using System.Net.Http;
+using System.Web;
+using System.Net;
+using System.Net.Http.Headers;
 
 namespace Reifnir.StaticSite
 {
@@ -19,24 +23,46 @@ namespace Reifnir.StaticSite
             contentHelper = _contentHelper;
         }
 
-        [FunctionName("StaticContentFunction")]
-        public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
+        [FunctionName("StaticSiteFunction")]
+        public HttpResponseMessage Run(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequestMessage req,
             ILogger log)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
+            var fileRelativePath = ParseFileArgument(req?.RequestUri?.Query);
+            log.LogInformation($"fileRelativePath={fileRelativePath}");
+            return Run(fileRelativePath, log);
+        }
 
-            string name = req.Query["name"];
+        internal HttpResponseMessage Run(string fileRelativePath, ILogger log)
+        {
+            log.LogDebug("Executing StaticContentServer.Run method...");
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
+            var contentResult = contentHelper.GetContent(fileRelativePath);
+            log.LogInformation($"contentResult type={contentResult?.GetType()?.Name}");
 
-            string responseMessage = string.IsNullOrEmpty(name)
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name}. This HTTP triggered function executed successfully.";
+            switch (contentResult)
+            {
+                case ContentNotFoundResult notFound:
+                    log.LogError($"Returning 404: {notFound.Message}");
+                    return new HttpResponseMessage(HttpStatusCode.NotFound);
 
-            return new OkObjectResult(responseMessage);
+                case ContentFoundResult found:
+                    var result = new HttpResponseMessage(HttpStatusCode.OK)
+                    {
+                        Content = new StreamContent(found.Content)
+                    };
+                    result.Content.Headers.ContentType = new MediaTypeHeaderValue(found.MimeType);
+                    return result;
+
+                default:
+                    throw new NotImplementedException($"No implementation for IContentResult of type {contentResult?.GetType()?.FullName}");
+            }
+        }
+
+        internal string ParseFileArgument(string queryString)
+        {
+            var queryArguments = HttpUtility.ParseQueryString(queryString);
+            return queryArguments.Get("file") ?? "";
         }
     }
 }
