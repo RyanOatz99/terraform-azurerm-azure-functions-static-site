@@ -51,6 +51,43 @@ namespace Reifnir.StaticSite.Tests.Content
         }
 
         [Fact]
+        public void GetContent_FileInRootOfContentDirReturnsContentFoundResult()
+        {
+            var sut = new ContentHelper(contentRoot.FullName);
+            var result = sut.GetContent(jsonFileAtRootRelativePath);
+
+            Assert.IsType<ContentFoundResult>(result);
+        }
+
+        [Fact]
+        public void GetContent_FileInSubdirectoryReturnsContentFoundResult()
+        {
+            var sut = new ContentHelper(contentRoot.FullName);
+            var result = sut.GetContent(indexHtmlFileInSubdirectoryRelativePath);
+
+            Assert.IsType<ContentFoundResult>(result);
+        }
+
+        [Fact]
+        public void GetContent_FileNotFoundReturnsContentNotFoundResult()
+        {
+            var sut = new ContentHelper(contentRoot.FullName);
+            var result = sut.GetContent(fileDoesNotExistRelativePath);
+
+            Assert.IsType<ContentNotFoundResult>(result);
+        }
+
+        [Fact]
+        public void GetContent_FileOutsideOfContentRootReturnsContentNotFoundResult()
+        {
+            var sut = new ContentHelper(contentRoot.FullName);
+            var executingAssembly = new FileInfo(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            var result = sut.GetContent($"../{executingAssembly.Name}");
+
+            Assert.IsType<ContentNotFoundResult>(result);
+        }
+
+        [Fact]
         public void TestAssumptionsAboutTestFilesExistence()
         {
             Assert.True(jsonFileAtRoot.Exists);

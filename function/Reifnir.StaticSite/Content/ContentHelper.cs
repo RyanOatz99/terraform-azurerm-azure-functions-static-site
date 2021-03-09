@@ -21,7 +21,22 @@ namespace Reifnir.StaticSite.Content
 
         public IContentResult GetContent(string relativePath)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var contentPath = GetContentAbsolutePath(relativePath);
+
+                if (PathOutsideOfContentDirectory(contentPath))
+                    return new ContentNotFoundResult($"relativePath with value of {relativePath ?? "null"} is outside of the allowed confines of {contentRoot.FullName}.");
+
+                if (!File.Exists(contentPath))
+                    return new ContentNotFoundResult($"For requested relativePath of {relativePath}, unable to locate file with absolute path of {contentPath}");
+
+                return CreateOkResult(contentPath);
+            }
+            catch (Exception ex)
+            {
+                return new ContentNotFoundResult(ex.ToString());
+            }
         }
 
         internal static IContentResult CreateOkResult(string contentPath)
