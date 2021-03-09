@@ -160,5 +160,37 @@ namespace Reifnir.StaticSite.Tests.Content
         {
             Assert.Throws<ArgumentException>(() => new ContentHelper("/does-not-exist"));
         }
+
+        [Fact]
+        public void PathOutsideOfContentDirectory_PathInRootOfContentDirectory()
+        {
+            var sut = new ContentHelper(contentRoot.FullName);
+            var actual = sut.PathOutsideOfContentDirectory(jsonFileAtRoot.FullName);
+            Assert.False(actual);
+        }
+
+        [Fact]
+        public void PathOutsideOfContentDirectory_PathInSubDirectoryOfContentDirectory()
+        {
+            var sut = new ContentHelper(contentRoot.FullName);
+            var actual = sut.PathOutsideOfContentDirectory(indexHtmlFileInSubdirectory.FullName);
+            Assert.False(actual);
+        }
+
+        [Fact]
+        public void PathOutsideOfContentDirectory_FileInSameDirectoryAsContentRoot()
+        {
+            var sut = new ContentHelper(contentRoot.FullName);
+            var actual = sut.PathOutsideOfContentDirectory(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            Assert.True(actual);
+        }
+
+        [Fact]
+        public void PathOutsideOfContentDirectory_StartsInContentDirectoryButTraversesParentDirectory()
+        {
+            var sut = new ContentHelper(contentRoot.FullName);
+            var actual = sut.PathOutsideOfContentDirectory($"{indexHtmlFileInSubdirectory.Directory.FullName}/../../something.txt");
+            Assert.True(actual);
+        }
     }
 }

@@ -46,5 +46,13 @@ namespace Reifnir.StaticSite.Content
             return contentFullPath;
 
         }
+
+        internal bool PathOutsideOfContentDirectory(string fullPath)
+        {
+            var absoluteResourcePath = Path.GetFullPath(fullPath);
+            var absoluteContentRootPath = contentRoot.FullName;
+
+            return !absoluteResourcePath.StartsWith(absoluteContentRootPath);            
+        }
     }
 }
