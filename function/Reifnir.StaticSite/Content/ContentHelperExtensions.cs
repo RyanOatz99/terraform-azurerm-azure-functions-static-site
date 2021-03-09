@@ -1,10 +1,7 @@
 ﻿using Microsoft.Azure.WebJobs.Host.Bindings;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace Reifnir.StaticSite.Content
 {

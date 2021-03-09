@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Reifnir.StaticSite.Content
+﻿namespace Reifnir.StaticSite.Content
 {
     public interface IContentHelper
     {
