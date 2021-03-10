@@ -2,3 +2,6 @@
 
 # Directory in which temporary artifacts are created
 .temp
+
+# Local env variable secrets file (install direnv)
+.envrc
