@@ -57,11 +57,14 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
+    env:
+      tf_actions_working_dir: './examples'
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         shell: bash
+        working-directory: ${{ env.tf_actions_working_dir }}
 
     steps:
     # Checkout the repository to the GitHub Actions runner
@@ -77,8 +80,6 @@ jobs:
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
-      with:
-        tf_actions_working_dir: ${{ './examples' }}
 
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
