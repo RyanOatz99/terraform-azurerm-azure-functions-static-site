@@ -8,3 +8,18 @@ terraform {
     }
   }
 }
+
+variable "static_content_directory" {
+  description = "This is the path to the directory containing static resources."
+}
+
+resource "null_resource" "package_build" {
+  triggers = {
+    always_run = timestamp()
+  }
+
+  provisioner "local-exec" {
+    interpreter =  [ "/bin/bash", "-c" ]
+    command     = "${path.module}/scripts/build-package.sh \"${var.static_content_directory}\""
+  }
+}

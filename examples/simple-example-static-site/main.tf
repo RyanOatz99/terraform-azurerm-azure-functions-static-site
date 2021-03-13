@@ -10,4 +10,6 @@ terraform {
 
 module "simple-example-static-site" {
   source = "../../"
+  static_content_directory = "${path.root}/static-content"
 }
+
