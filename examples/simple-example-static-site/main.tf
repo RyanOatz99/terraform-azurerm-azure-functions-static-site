@@ -8,6 +8,6 @@ terraform {
   }
 }
 
-resource "null_resource" "github_actions_test" {
-
+module "simple-example-static-site" {
+  source = "../../"
 }
