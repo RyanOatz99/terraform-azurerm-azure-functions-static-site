@@ -22,14 +22,14 @@ data "archive_file" "azure_function_package" {
 }
 
 resource "azurerm_storage_blob" "function" {
-  name                   = "functionapp-${formatdate("YYYY-MM-DD-hh-mm-ss", timestamp())}.zip"
+  name                   = "fn-${formatdate("YYYY-MM-DD-hh-mm-ss", timestamp())}.zip"
   storage_account_name   = azurerm_storage_account.static_site.name
   storage_container_name = azurerm_storage_container.function_packages.name
   type                   = "Block"
   metadata = {
     sha1   = data.archive_file.azure_function_package.output_sha
-    sha256 = base64decode(data.archive_file.azure_function_package.output_base64sha256)
+    sha256 = data.archive_file.azure_function_package.output_base64sha256
     md5    = data.archive_file.azure_function_package.output_md5
   }
-  source = local.azure_functions_package_path
+  source = data.archive_file.azure_function_package.output_path
 }
