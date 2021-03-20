@@ -4,6 +4,8 @@
 
 ## TODO before publishing on Terraform public registry as 1.0.0
 
+* Remove explicit references to 0.15 beta and bump module minimum version to 0.15
+
 * Wire up [pre-commit-terraform](https://github.com/antonbabenko/pre-commit-terraform)
 
 * Automate testing
