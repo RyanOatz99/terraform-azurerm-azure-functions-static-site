@@ -1,4 +1,8 @@
 #!/bin/bash
+#====================================
+# Requires the following packages
+# - dotnet (version ~> 3.1)
+#====================================
 
 STATIC_CONTENT_DIR="$1"
 
