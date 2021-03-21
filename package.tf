@@ -11,7 +11,7 @@ resource "null_resource" "package_build" {
 
 locals {
   temp_package_contents_dir    = "${path.module}/.temp/package"
-  azure_functions_package_path = "${path.module}/.temp/package.zip"
+  azure_functions_package_path = "${path.module}/.temp/package-${local.now_timestamp}.zip"
 }
 
 data "archive_file" "azure_function_package" {
@@ -22,7 +22,7 @@ data "archive_file" "azure_function_package" {
 }
 
 resource "azurerm_storage_blob" "function" {
-  name                   = "fn-${formatdate("YYYY-MM-DD-hh-mm-ss", timestamp())}.zip"
+  name                   = "fn-${local.now_timestamp}.zip"
   storage_account_name   = azurerm_storage_account.static_site.name
   storage_container_name = azurerm_storage_container.function_packages.name
   type                   = "Block"

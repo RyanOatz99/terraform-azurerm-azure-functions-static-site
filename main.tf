@@ -54,7 +54,3 @@ resource "azurerm_storage_container" "function_packages" {
   storage_account_name  = azurerm_storage_account.static_site.name
   container_access_type = "private"
 }
-
-# output "debug" {
-#   value = local.name_without_special_char
-# }
