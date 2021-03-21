@@ -82,7 +82,6 @@ jobs:
         # https://github.com/hashicorp/terraform/issues/28080
         terraform_version: 0.15.0-beta2
 
-
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
