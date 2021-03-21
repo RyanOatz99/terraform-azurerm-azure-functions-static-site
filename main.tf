@@ -21,8 +21,13 @@ locals {
   #   be from 3 to 24 characters long ("sa" + max of 14 characters from name + 8 random == 24)
   #   must be unique across all storage accounts as they are given a unique public DNS name
   storave_account_name_slug       = substr(lower(local.name_without_special_char), 0, 14)
+
   storage_account_name            = "sa${local.storave_account_name_slug}${random_string.storage_account_name.result}"
   function_package_container_name = "${var.name}-static-site-az-fn-packages"
+
+  now          = timestamp()
+  now_friendly = formatdate("YYYY-MM-DD-hh-mm-ss", local.now)
+  in_ten_years = "${(tonumber(formatdate("YYYY", local.now)) + 10)}-${formatdate("MM-DD'T'hh:mm:ssZ", local.now)}"
 }
 
 resource "azurerm_resource_group" "static_site" {
