@@ -4,6 +4,10 @@
 
 ## TODO before publishing on Terraform public registry as 1.0.0
 
+* Explicitly point out this is a consumption plan account (minor cold start) in this file
+
+* Consider adding premium function capability
+
 * Remove explicit references to 0.15 beta and bump module minimum version to 0.15
 
 * Wire up [pre-commit-terraform](https://github.com/antonbabenko/pre-commit-terraform)
