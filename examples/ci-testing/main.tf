@@ -12,12 +12,12 @@ resource "random_string" "name_suffix" {
   number  = true
   upper   = false
   special = false
-  length  = 8
+  length  = 6
 }
 
 module "ci_static_site" {
   source                   = "../../"
-  name                     = "simple-example-static-site-${random_string.name_suffix.result}"
+  name                     = "simple-example-static-site-ci-${random_string.name_suffix.result}"
   static_content_directory = "${path.root}/static-content"
   tags = {
     "Application" = "Simple example static site"

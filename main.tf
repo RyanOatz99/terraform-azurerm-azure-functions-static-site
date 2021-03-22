@@ -1,5 +1,5 @@
 terraform {
-  # Only testing with 0.14 for now
+  # Bugs in Terraform 0.14 will make the min version of this module 0.15 once that's released
   required_version = "~> 0.14"
   required_providers {
     azurerm = {
