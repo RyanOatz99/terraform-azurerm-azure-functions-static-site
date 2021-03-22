@@ -53,6 +53,7 @@ resource "azurerm_function_app" "static_site" {
   storage_account_access_key = azurerm_storage_account.static_site.primary_access_key
   os_type                    = "linux"
   version                    = "~3"
+  https_only                 = true
 
   enable_builtin_logging = false
 
