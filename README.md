@@ -16,6 +16,8 @@
 
 * Actually use it on waaaaaaaaaay-out-of-date resume site
 
+* Add automatic renewal of Let's Encrypt cert
+
 * Take options for more than one default page name
 
 * Take more than one DNS provider (Azure DNS, Route 53, Cloudflare, etc.) See: [Module Composition#Multi-cloud Abstractions](https://www.terraform.io/docs/language/modules/develop/composition.html#multi-cloud-abstractions)
