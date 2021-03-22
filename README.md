@@ -14,8 +14,6 @@
 
 * Automate testing
 
-* Come up with simplest example
-
 * Actually use it on waaaaaaaaaay-out-of-date resume site
 
 * Support custom domain name
