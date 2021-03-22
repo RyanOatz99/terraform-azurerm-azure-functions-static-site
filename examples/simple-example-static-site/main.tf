@@ -2,12 +2,12 @@ terraform {
 
   # If you're new to Terraform and just want to try this module out for yourself, remove this 'backend' block and your
   # state will be stored locally.
-  backend "azurerm" {
-    resource_group_name  = "rg-common-storage"
-    storage_account_name = "sareifnircommonstorage"
-    container_name       = "terraform-state"
-    key                  = "terraform-azurerm-azure-functions-static-site-simple-example-static-site.tfstate"
-  }
+  # backend "azurerm" {
+  #   resource_group_name  = "rg-common-storage"
+  #   storage_account_name = "sareifnircommonstorage"
+  #   container_name       = "terraform-state"
+  #   key                  = "terraform-azurerm-azure-functions-static-site-simple-example-static-site.tfstate"
+  # }
 }
 
 resource "random_string" "name_suffix" {
@@ -28,6 +28,6 @@ module "simple_example_static_site" {
   }
 }
 
-output "debug" {
-  value = module.simple_example_static_site
-}
+# output "debug" {
+#   value = module.simple_example_static_site
+# }
