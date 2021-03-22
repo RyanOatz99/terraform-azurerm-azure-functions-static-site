@@ -64,10 +64,11 @@ resource "azurerm_function_app" "static_site" {
   }
 
   app_settings = {
-    "FUNCTIONS_WORKER_RUNTIME" = "dotnet"
-    "FUNCTION_APP_EDIT_MODE"   = "readonly"
-    "WEBSITE_RUN_FROM_PACKAGE" = "https://${azurerm_storage_account.static_site.name}.blob.core.windows.net/${azurerm_storage_container.function_packages.name}/${azurerm_storage_blob.function.name}${data.azurerm_storage_account_sas.package.sas}"
-    "https_only"               = true
+    "FUNCTIONS_WORKER_RUNTIME"       = "dotnet"
+    "FUNCTION_APP_EDIT_MODE"         = "readonly"
+    "WEBSITE_RUN_FROM_PACKAGE"       = "https://${azurerm_storage_account.static_site.name}.blob.core.windows.net/${azurerm_storage_container.function_packages.name}/${azurerm_storage_blob.function.name}${data.azurerm_storage_account_sas.package.sas}"
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.static_site.instrumentation_key
+    "https_only"                     = true
 
     # Informational
     "package_creation_timestamp" = local.now

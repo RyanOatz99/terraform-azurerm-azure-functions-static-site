@@ -22,8 +22,6 @@
 
 * Take options for more than one default page name
 
-* Add optional AppInsights integration (just take a key or magic up a whole resource)
-
 * Example using custom domain and pre-existing TLS cert
 
 * Example using custom domain and lets-encrypt ACME generated cert
@@ -34,7 +32,14 @@
 
 <!--## Assumptions-->
 
-<!--## Important note-->
+## Important note
+
+_AKA Give it a minute..._
+
+Azure Functions can take a couple of minutes to start working after deployment.
+You may receive http responses such as `The service is unavailable.`, however, you just need to give it a few minutes.
+
+Application Insights also takes a few minutes before it starts showing results (aka even looks like it's working).
 
 <!--## Usage example-->
 <!--## Conditional creation-->
