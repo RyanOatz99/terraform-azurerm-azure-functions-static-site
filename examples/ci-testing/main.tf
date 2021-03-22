@@ -7,6 +7,10 @@ terraform {
   }
 }
 
+provider "azurerm" {
+  features {}
+}
+
 resource "random_string" "name_suffix" {
   lower   = true
   number  = true
