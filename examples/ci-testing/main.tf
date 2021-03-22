@@ -26,5 +26,5 @@ module "ci_static_site" {
 }
 
 output "debug" {
-  value = module.simple_example_static_site
+  value = module.ci_static_site
 }
