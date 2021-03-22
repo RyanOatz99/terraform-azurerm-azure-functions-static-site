@@ -21,8 +21,7 @@
 * Take options for more than one default page name
 
 * Take more than one DNS provider (Azure DNS, Route 53, Cloudflare, etc.) See: [Module Composition#Multi-cloud Abstractions](https://www.terraform.io/docs/language/modules/develop/composition.html#multi-cloud-abstractions)
-
-* Consider bumping to .NET 5.0, which has preview access in Azure Functions: https://codetraveler.io/2021/02/12/creating-azure-functions-using-net-5/
+  * Probably not going to build this into the module as it relies on a non-hashicorp provider for Let's Encrypt generation.
 
 <!--## Assumptions-->
 

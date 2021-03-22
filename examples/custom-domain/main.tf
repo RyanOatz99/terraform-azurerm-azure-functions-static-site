@@ -16,10 +16,18 @@ variable "azure_dns_zone_id" {
   description = "The full Azure resource ID for the DNS zone we're using."
 }
 
+resource "random_string" "name_suffix" {
+  length  = 4
+  number  = true
+  lower   = true
+  upper   = false
+  special = false
+}
+
 locals {
   # Hostname is everything more specific than the domain or TLD. See: https://techterms.com/definition/fqdn
-  # We want to host our static site at 'some-custom-dns.somedomain.com'
-  dns_hostname                 = "some-custom-dns"
+  # We want to host our static site at 'some-custom-dns-1a6z.somedomain.com'
+  dns_hostname                 = "some-custom-dns-${random_string.name_suffix.result}"
   full_custom_domain_name      = "${local.dns_hostname}.${data.azurerm_dns_zone.custom.name}"
   dns_zone_subscription_id     = split("/", var.azure_dns_zone_id)[2]
   dns_zone_name                = split("/", var.azure_dns_zone_id)[8]

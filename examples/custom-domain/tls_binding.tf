@@ -7,31 +7,6 @@ terraform {
   }
 }
 
-variable "lets_encrypt_is_prod" {
-  description = "Since Let's Encrypt limits the use of their production"
-  type        = bool
-  default     = false
-}
-
-locals {
-  lets_encrypt_staging_server = "https://acme-staging-v02.api.letsencrypt.org/directory"
-  lets_encrypt_prod_server    = "https://acme-v02.api.letsencrypt.org/directory"
-  lets_encrypt_server_url     = var.lets_encrypt_is_prod ? local.lets_encrypt_prod_server : local.lets_encrypt_staging_server
-}
-
-provider "acme" {
-  server_url = local.lets_encrypt_server_url
-}
-
-resource "tls_private_key" "reg_private_key" {
-  algorithm = "RSA"
-}
-
-resource "acme_registration" "reg" {
-  account_key_pem = tls_private_key.reg_private_key.private_key_pem
-  email_address   = "jim.andreasen@reifnir.com"
-}
-
 variable "azure_client_id" {
   description = "ACME challenge Azure Client ID (think username)"
 }
@@ -43,6 +18,24 @@ variable "azure_client_secret" {
 
 variable "azure_tenant_id" {
   description = "ACME challenge Azure tenant what owns the DNS zone"
+}
+
+locals {
+  lets_encrypt_prod_server    = "https://acme-v02.api.letsencrypt.org/directory"
+}
+
+provider "acme" {
+  # You cannot attach a let's encrypt staging cert to an app in Azure, you get a BadRequest 04038 error: Expired certificate is not allowed.
+  server_url = "https://acme-v02.api.letsencrypt.org/directory"
+}
+
+resource "tls_private_key" "reg_private_key" {
+  algorithm = "RSA"
+}
+
+resource "acme_registration" "reg" {
+  account_key_pem = tls_private_key.reg_private_key.private_key_pem
+  email_address   = "jim.andreasen@reifnir.com"
 }
 
 resource "random_password" "pfx" {
@@ -68,6 +61,7 @@ resource "acme_certificate" "certificate" {
       AZURE_RESOURCE_GROUP  = local.dns_zone_resource_group_name
     }
   }
+  depends_on = [azurerm_dns_cname_record.some_custom_dns]
 }
 
 resource "azurerm_app_service_certificate" "custom_hostname" {
@@ -83,4 +77,8 @@ resource "azurerm_app_service_certificate_binding" "custom_hostname" {
   hostname_binding_id = azurerm_app_service_custom_hostname_binding.static_site.id
   certificate_id      = azurerm_app_service_certificate.custom_hostname.id
   ssl_state           = "SniEnabled"
+}
+
+output "custom_domain_name" {
+  value = local.full_custom_domain_name
 }
