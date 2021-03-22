@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# This is a template of a direnv environment file. It's just a convenience for local development.
+# If you don't use direnv, you can safely ignore this.
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+export TF="$("$SCRIPT_DIR/scripts/setup-terraform-beta.sh" 0.15.0-beta1)"
