@@ -100,8 +100,6 @@ jobs:
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       run: |
-        export TF_LOG='trace'
-        terraform --version
         terraform apply -auto-approve
         TF_EXIT_CODE="$?"
         echo "terraform apply exited with code '$TF_EXIT_CODE'"
@@ -123,6 +121,6 @@ jobs:
           echo "Unable to find script at path '$SCRIPT_PATH'"
         fi
 
-    # # Tears down the Terraform resources
-    # - name: Terraform Destroy
-    #   run: terraform destroy -auto-approve
+    # Tears down the Terraform resources
+    - name: Terraform Destroy
+      run: terraform destroy -auto-approve
