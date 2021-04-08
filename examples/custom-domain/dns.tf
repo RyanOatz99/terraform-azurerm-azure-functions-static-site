@@ -25,7 +25,7 @@ resource "azurerm_dns_txt_record" "some_custom_dns_domain_verification" {
   # This is a race condition, consider adding a script that waits until the expected TXT record can be found
   # If this blows up, just increase the durationor rerun apply
   provisioner "local-exec" {
-    command     = "sleep 10s"
+    command = "sleep 10s"
   }
 }
 
