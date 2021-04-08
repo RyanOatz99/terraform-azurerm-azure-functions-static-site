@@ -81,6 +81,8 @@ jobs:
         # TODO: Remove explicit references to 0.15 beta and bump module minimum version to 0.15
         # https://github.com/hashicorp/terraform/issues/28080
         terraform_version: 0.15.0-rc2
+        # Because otherwise the wrapper makes terraform outputs a pain
+        terraform_wrapper: false
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
@@ -107,9 +109,6 @@ jobs:
 
     - name: Terraform outputs
       id: terraform_outputs
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_wrapper: false
       run: echo "::set-output name=tf_output_json::$(terraform output -json -no-color)"
 
       # TF_OUTPUT="`terraform output -json -no-color`"
