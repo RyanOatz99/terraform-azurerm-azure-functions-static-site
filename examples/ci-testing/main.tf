@@ -29,6 +29,6 @@ module "ci_static_site" {
   }
 }
 
-output "debug" {
+output "ci_static_site" {
   value = module.ci_static_site
 }

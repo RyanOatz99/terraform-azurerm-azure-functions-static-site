@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     env:
-      tf_actions_working_dir: './examples'
+      tf_actions_working_dir: './examples/ci-testing'
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -99,3 +99,23 @@ jobs:
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terraform apply -auto-approve
+
+    - name: Test Static Site
+      run: |
+        echo "Currently running as `whoami`"
+
+        FN_HOSTNAME="`terraform output -json | jq -r '.ci_static_site'.value.default_hostname`"
+        echo "Azure Functions Hostname: '$FN_HOSTNAME'"
+
+        SCRIPT_PATH="$GITHUB_WORKSPACE/scripts/wait-for-content.sh"
+        if [ -f "$SCRIPT_PATH" ]
+        then
+          echo "Executing script at path '$GITHUB_WORKSPACE/scripts/wait-for-content.sh'"
+          $SCRIPT_PATH --url="https://$FN_HOSTNAME/"
+        else
+          echo "Unable to find script at path '$SCRIPT_PATH'"
+        fi
+
+    # Tears down the Terraform resources
+    - name: Terraform Destroy
+      run: terraform destroy -auto-approve
