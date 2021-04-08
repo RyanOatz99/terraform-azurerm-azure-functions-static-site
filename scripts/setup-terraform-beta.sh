@@ -13,7 +13,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 SCRIPT_NAME="$( basename "${BASH_SOURCE[0]}")"
 VERSION="$1"
 
-PROJECT_TEMP="$SCRIPT_DIR/../.temp-tf"
+PROJECT_TEMP="$SCRIPT_DIR/../.temp"
 
 >&2 echo "Creating project temporary directory if it does not yet exist..."
 mkdir -p "$PROJECT_TEMP"

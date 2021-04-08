@@ -1,11 +1,12 @@
 .terraform
 
-# Directory in which temporary artifacts are created
-.temp
-
 # Didn't want beta version of terraform hosted in .temp since that dir gets wiped during build.
 # Putting in .temp would work... once. It would disappear immediately after apply
-.temp-tf
+.temp
 
 # Local env variable secrets file (install direnv)
 .envrc
+
+# The example project doesn't have a remote backend. Don't accidentally check your secrets into source control
+terraform.tfstate
+terraform.tfstate.backup
