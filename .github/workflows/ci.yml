@@ -80,7 +80,7 @@ jobs:
         # A bug in TF <= 0.14 causes the null_resource.package_build local provisioner to never return
         # TODO: Remove explicit references to 0.15 beta and bump module minimum version to 0.15
         # https://github.com/hashicorp/terraform/issues/28080
-        terraform_version: 0.15.0-rc1
+        terraform_version: 0.15.0-rc2
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
@@ -98,6 +98,7 @@ jobs:
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       run: |
+        export TF_LOG='trace'
         terraform --version
         terraform apply -auto-approve
         TF_EXIT_CODE="$?"
