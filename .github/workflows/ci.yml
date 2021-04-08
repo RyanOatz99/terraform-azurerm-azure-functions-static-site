@@ -115,25 +115,25 @@ jobs:
 
       # TF_OUTPUT="`terraform output -json -no-color`"
 
-    - name: Test Static Site
-      env:
-        TF_OUTPUT: ${{ steps.terraform_outputs.outputs }}
-      run: |
-        echo "Currently running as `whoami`"
-        echo "TF_OUTPUT=$TF_OUTPUT"
+    # - name: Test Static Site
+    #   env:
+    #     TF_OUTPUT: ${{ steps.terraform_outputs.outputs }}
+    #   run: |
+    #     echo "Currently running as `whoami`"
+    #     echo "TF_OUTPUT=$TF_OUTPUT"
 
-        FN_HOSTNAME="`echo "$TF_OUTPUT"`" | jq -r '.ci_static_site'.value.default_hostname`"
-        echo "Azure Functions Hostname: '$FN_HOSTNAME'"
+    #     FN_HOSTNAME="`echo "$TF_OUTPUT"`" | jq -r '.ci_static_site'.value.default_hostname`"
+    #     echo "Azure Functions Hostname: '$FN_HOSTNAME'"
 
-        SCRIPT_PATH="$GITHUB_WORKSPACE/scripts/wait-for-content.sh"
-        if [ -f "$SCRIPT_PATH" ]
-        then
-          echo "Executing script at path '$GITHUB_WORKSPACE/scripts/wait-for-content.sh'"
-          $SCRIPT_PATH --url="https://$FN_HOSTNAME/"
-        else
-          echo "Unable to find script at path '$SCRIPT_PATH'"
-        fi
+    #     SCRIPT_PATH="$GITHUB_WORKSPACE/scripts/wait-for-content.sh"
+    #     if [ -f "$SCRIPT_PATH" ]
+    #     then
+    #       echo "Executing script at path '$GITHUB_WORKSPACE/scripts/wait-for-content.sh'"
+    #       $SCRIPT_PATH --url="https://$FN_HOSTNAME/"
+    #     else
+    #       echo "Unable to find script at path '$SCRIPT_PATH'"
+    #     fi
 
-    # Tears down the Terraform resources
-    - name: Terraform Destroy
-      run: terraform destroy -auto-approve
+    # # Tears down the Terraform resources
+    # - name: Terraform Destroy
+    #   run: terraform destroy -auto-approve
