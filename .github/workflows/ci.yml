@@ -109,7 +109,7 @@ jobs:
 
     - name: Terraform output default_hostname
       id: terraform_output_default_hostname
-      run: terraform output default_hostname
+      run: terraform output -raw default_hostname
 
       # TF_OUTPUT="`terraform output -json -no-color`"
 
