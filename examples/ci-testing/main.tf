@@ -29,6 +29,6 @@ module "ci_static_site" {
   }
 }
 
-output "ci_static_site" {
-  value = module.ci_static_site
+output "default_hostname" {
+  value = module.ci_static_site.default_hostname
 }
