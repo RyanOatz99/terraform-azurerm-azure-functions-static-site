@@ -36,7 +36,7 @@ wait-for-url() {
   do echo "`date` - Waiting for ${0}..." && sleep 5;\
   done' ${1}
   echo "OK!"
-  curl -I $1
+  curl -sv $1
 }
 
 init "$@"
