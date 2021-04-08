@@ -25,7 +25,7 @@ function init() {
 
   if [ -z "$URL" ]
   then
-    "--url argument not passed. Exiting script with error."
+    echo "--url argument not passed. Exiting script with error."
     exit 1
   fi
 }
