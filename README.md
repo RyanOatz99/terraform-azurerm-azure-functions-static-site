@@ -4,6 +4,8 @@
 
 ## TODO before publishing on Terraform public registry as 1.0.0
 
+* Make app insights optional
+
 * Explicitly point out this is a consumption plan account (minor cold start) in this file
 
 * Consider adding premium function capability

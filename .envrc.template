@@ -5,10 +5,12 @@
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-export TF="$("$SCRIPT_DIR/scripts/setup-terraform-beta.sh" 0.15.0-beta1)"
+export TF="$("$SCRIPT_DIR/scripts/setup-terraform-beta.sh" 0.15.0-rc2)"
 
-export TF_VAR_azure_dns_zone_id="[fill this in with the full resource ID for an Azure DNS Zone resource]"
+export TF_VAR_azure_dns_zone_id="/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-some-resource-group/providers/Microsoft.Network/dnszones/customdomain.com"
 
 export TF_VAR_azure_client_id="[service principal client id]"
 export TF_VAR_azure_client_secret="[service principal client secret]"
 export TF_VAR_azure_tenant_id="[Azure tenant for the subscription]"
+
+export TF_VAR_lets_encrypt_contact_email="email@example.org"

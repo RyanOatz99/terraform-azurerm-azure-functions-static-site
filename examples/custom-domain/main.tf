@@ -1,4 +1,5 @@
 terraform {
+  # Switch this out for whatever backend you wish to use
   backend "azurerm" {
     resource_group_name  = "rg-common-storage"
     storage_account_name = "sareifnircommonstorage"
@@ -11,11 +12,6 @@ provider "azurerm" {
   features {}
 }
 
-# We're hosting DNS with an Azure DNS zone. You can use any DNS provider, though.
-variable "azure_dns_zone_id" {
-  description = "The full Azure resource ID for the DNS zone we're using."
-}
-
 resource "random_string" "name_suffix" {
   length  = 4
   number  = true
@@ -25,8 +21,10 @@ resource "random_string" "name_suffix" {
 }
 
 locals {
-  # Hostname is everything more specific than the domain or TLD. See: https://techterms.com/definition/fqdn
-  # We want to host our static site at 'some-custom-dns-1a6z.somedomain.com'
+  # Hostname is the part of the DNS record that comes before the domain and TLD. See: https://techterms.com/definition/fqdn
+  #   Ex: hostname.mydomain.com       -> hostname = 'hostname'
+  #   Ex: other.hostname.mydomain.com -> hostname = 'other.hostname'
+  # We want to host our static site at 'some-custom-dns-0000.somedomain.com'
   dns_hostname                 = "some-custom-dns-${random_string.name_suffix.result}"
   full_custom_domain_name      = "${local.dns_hostname}.${data.azurerm_dns_zone.custom.name}"
   dns_zone_subscription_id     = split("/", var.azure_dns_zone_id)[2]
@@ -36,7 +34,7 @@ locals {
   azure_function_name = "custom-dns-example"
 
   tags = {
-    "Application" = "Simple example static site with a custom DNS entry"
+    "Application" = "Simple example static site with a custom DNS entry and TLS"
     "ManagedBy"   = "Terraform"
   }
 }
