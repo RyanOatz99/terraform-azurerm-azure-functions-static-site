@@ -16,6 +16,7 @@ module "simple_example_static_site" {
   source                   = "../../"
   name                     = "simple-example-static-site-${random_string.name_suffix.result}"
   static_content_directory = "${path.root}/static-content"
+  enable_app_insights      = true
   tags = {
     "Application" = "Simple example static site"
     "ManagedBy"   = "Terraform"

@@ -31,7 +31,7 @@ resource "acme_certificate" "certificate" {
   common_name               = local.full_custom_domain_name
   subject_alternative_names = [local.full_custom_domain_name]
   certificate_p12_password  = random_password.pfx.result
-  min_days_remaining        = 89
+  min_days_remaining        = 30
 
   dns_challenge {
     provider = "azure"

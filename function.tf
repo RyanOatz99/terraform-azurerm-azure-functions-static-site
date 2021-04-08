@@ -68,7 +68,7 @@ resource "azurerm_function_app" "static_site" {
     "FUNCTIONS_WORKER_RUNTIME"       = "dotnet"
     "FUNCTION_APP_EDIT_MODE"         = "readonly"
     "WEBSITE_RUN_FROM_PACKAGE"       = "https://${azurerm_storage_account.static_site.name}.blob.core.windows.net/${azurerm_storage_container.function_packages.name}/${azurerm_storage_blob.function.name}${data.azurerm_storage_account_sas.package.sas}"
-    "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.static_site.instrumentation_key
+    "APPINSIGHTS_INSTRUMENTATIONKEY" = var.enable_app_insights ? azurerm_application_insights.static_site.0.instrumentation_key : ""
     "https_only"                     = true
 
     # Informational

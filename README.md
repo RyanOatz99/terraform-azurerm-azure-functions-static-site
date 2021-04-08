@@ -4,8 +4,6 @@
 
 ## TODO before publishing on Terraform public registry as 1.0.0
 
-* Make app insights optional
-
 * Explicitly point out this is a consumption plan account (minor cold start) in this file
 
 * Consider adding premium function capability
@@ -32,7 +30,7 @@
 _AKA Give it a minute..._
 
 Azure Functions can take a couple of minutes to start working after deployment.
-You may receive http responses such as `The service is unavailable.`, however, you just need to give it a few minutes.
+You may receive http responses such as `The service is unavailable.`, however, you just need to wait a little.
 
 Application Insights also takes a few minutes before it starts showing results (aka even looks like it's working).
 
