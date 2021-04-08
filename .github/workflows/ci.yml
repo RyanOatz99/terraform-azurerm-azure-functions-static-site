@@ -100,6 +100,9 @@ jobs:
       run: |
         terraform --version
         terraform apply -auto-approve
+        TF_EXIT_CODE="$?"
+        echo "terraform apply exited with code '$TF_EXIT_CODE'"
+        exit $TF_EXIT_CODE
 
     - name: Test Static Site
       run: |
