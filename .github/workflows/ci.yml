@@ -117,10 +117,7 @@ jobs:
       run: |
         echo "Currently running as `whoami`"
         
-        TF_OUTPUT="`terraform output -raw default_hostname`"
-        echo "TF_OUTPUT=$TF_OUTPUT"
-
-        FN_HOSTNAME="`echo "$TF_OUTPUT"`" | jq -r '.ci_static_site'.value.default_hostname`"
+        FN_HOSTNAME="`terraform output -raw default_hostname`"
         echo "Azure Functions Hostname: '$FN_HOSTNAME'"
 
         SCRIPT_PATH="$GITHUB_WORKSPACE/scripts/wait-for-content.sh"
