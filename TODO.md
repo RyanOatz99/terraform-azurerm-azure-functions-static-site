@@ -1,5 +1,7 @@
 ## TODO
 
+* Force error when dotnet 3.1 not installed. There's currently no indication and terraform continues without error
+
 * Code generation for variables and outputs
 
 * Consider adding premium function capability
