@@ -2,6 +2,8 @@
 
 [![LICENSE](https://img.shields.io/github/license/reifnir/terraform-azurerm-azure-functions-static-site)](https://github.com/reifnir/terraform-azurerm-azure-functions-static-site/blob/master/LICENSE)
 
+**BEFORE YOU USE THIS...** I've made another module that doesn't require any C# code, compilation or artifacts (as that can seem fishy to folk). It's located here at [https://registry.terraform.io/modules/reifnir/static-site/azurerm](https://registry.terraform.io/modules/reifnir/static-site/azurerm).
+
 This Terraform module stands up an Azure Functions website that hosts static content.
 It does this by building a C# .NET Core 3.1 Azure Functions package with the static contents hosted inside.
 
@@ -40,8 +42,8 @@ Application Insights also takes a few minutes before it starts showing results (
 Basic example
 
  ```terraform
-module "static_site" {
-  source                   = "../../"
+module "content_types" {
+  source = "../../"
   name                     = "my-static-site"
   static_content_directory = "${path.root}/static-content"
   enable_app_insights      = false
